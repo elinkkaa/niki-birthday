@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Niki 💛</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D890;
+    --gold-faint: #F9F3E0;
+    --ink: #1A1612;
+    --muted: #7A6F62;
+    --cream: #FBF8F2;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+  }
+
+  .stars {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle var(--dur) ease-in-out infinite var(--delay);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+  }
+
+  /* ── LOCK SCREEN ── */
+  #lock {
+    animation: fadeUp 1s ease both;
+  }
+
+  .ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
+  }
+
+  .gift-icon {
+    font-size: 52px;
+    margin-bottom: 1.5rem;
+    display: block;
+    animation: gentlePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes gentlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+
+  .lock-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+
+  .lock-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .input-wrap {
+    position: relative;
+    max-width: 280px;
+    margin: 0 auto 1rem;
+  }
+
+  .input-wrap::before,
+  .input-wrap::after {
+    content: '—';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 12px;
+    opacity: 0.6;
+  }
+  .input-wrap::before { left: 12px; }
+  .input-wrap::after { right: 12px; }
+
+  input[type="text"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  input[type="text"]:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  input[type="text"]::placeholder {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  .error {
+    font-size: 12px;
+    color: #B5875A;
+    letter-spacing: 0.05em;
+    min-height: 20px;
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 2rem auto;
+    max-width: 280px;
+    opacity: 0.4;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+  }
+  .divider span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--gold);
+  }
+
+  /* ── REVEAL SCREEN ── */
+  #reveal {
+    display: none;
+  }
+
+  #reveal.active {
+    display: block;
+    animation: fadeUp 1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .reveal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 2.5rem;
+  }
+
+  .heart {
+    color: #C4607A;
+    display: inline-block;
+    animation: heartbeat 2.2s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.2); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.15); }
+    56% { transform: scale(1); }
+  }
+
+  .letter-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2rem 2rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .letter-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--gold-light), var(--gold));
+  }
+
+  .letter-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .letter-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .clue-box {
+    background: var(--gold-faint);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    text-align: left;
+    margin-top: 1.5rem;
+  }
+
+  .clue-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .clue-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .clue-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .footer-note {
+    margin-top: 2rem;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="container">
+
+  <!-- LOCK SCREEN -->
+  <div id="lock">
+    <p class="ornament">✦ &nbsp; for niki &nbsp; ✦</p>
+    <span class="gift-icon">🎁</span>
+    <h1 class="lock-title">You made it this far.</h1>
+    <p class="lock-subtitle">You have all the letters. Put them together — what's the word? Type it below to unlock your gift.</p>
+
+    <div class="input-wrap">
+      <input type="text" id="wordInput" maxlength="20" placeholder="enter the word" autocomplete="off" autocorrect="off" spellcheck="false" oninput="checkWord()" />
+    </div>
+    <p class="error" id="errorMsg"></p>
+
+    <div class="divider"><span>✦</span></div>
+    <p style="font-size: 12px; color: var(--muted); letter-spacing: 0.05em; opacity: 0.7; font-style: italic;">nine letters. you know this one.</p>
+  </div>
+
+  <!-- REVEAL SCREEN -->
+  <div id="reveal">
+    <p class="reveal-tag">✦ &nbsp; happy birthday &nbsp; ✦</p>
+    <h1 class="reveal-title">You found it. <span class="heart">♥</span></h1>
+
+    <div class="letter-card">
+      <p>Me and you — never let me go. That's not just a lyric, that's us. From the very first time we heard Raindance together, it became ours.</p>
+      <p>You make every ordinary moment feel like something worth remembering. I wanted to give you something as special as you are — so we're going to see Dave live. Together.</p>
+      <p>Tell me two times, tell me two times — I love you. Happy birthday, my love. ♥</p>
+    </div>
+
+    <div class="clue-box">
+      <span class="clue-icon">🛏️</span>
+      <div>
+        <p class="clue-label">Your final clue</p>
+        <p class="clue-text">Go to the bedroom. Look under the bed. There's a blue bag waiting for you. 💙</p>
+      </div>
+    </div>
+
+    <p class="footer-note">me and you ✦ always</p>
+  </div>
+
+</div>
+
+<script>
+  const starsContainer = document.getElementById('stars');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.setProperty('--dur', (3 + Math.random() * 5) + 's');
+    s.style.setProperty('--delay', (Math.random() * 6) + 's');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.width = s.style.height = (1 + Math.random() * 2) + 'px';
+    starsContainer.appendChild(s);
+  }
+
+  function checkWord() {
+    const val = document.getElementById('wordInput').value.trim().toUpperCase();
+    const err = document.getElementById('errorMsg');
+    if (val.length < 9) { err.textContent = ''; return; }
+    if (val === 'RAINDANCE') {
+      document.getElementById('lock').style.display = 'none';
+      document.getElementById('reveal').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      err.textContent = 'Not quite... you have all the letters. Keep thinking.';
+      document.getElementById('wordInput').value = '';
+    }
+  }
+</script>
+</body>
+</html>
